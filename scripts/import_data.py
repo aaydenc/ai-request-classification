@@ -1,6 +1,6 @@
 import pandas as pd
 
-new_file_path = "./data/clean/clean_data.csv"
+NEW_FILE_PATH = "./data/clean/clean_data.csv"
 
 def check_duplicate_data(dataframe):
     """ Removed duplicate data from the provided dataframe.
@@ -44,4 +44,4 @@ if __name__ == "__main__":
     clean_df = clean_data(copy_df)
     clean_df = check_duplicate_data(clean_df)
 
-    clean_df.to_csv(new_file_path, index=False)
+    clean_df.to_csv(NEW_FILE_PATH, index=False)
