@@ -2,24 +2,22 @@ import pandas as pd
 
 new_file_path = "./data/clean/clean_data.csv"
 
-
 def check_duplicate_data(dataframe):
     """ Removed duplicate data from the provided dataframe.
         
-
     Args:
         dataframe: The specified dataframe being checked.
 
     Returns:
         A dataframe with duplicate data corrected.
     """
-    new_df = dataframe.copy()
-    new_df.to_csv(new_file_path)
+    
 
-    no_duplicate_data = new_df.drop_duplicates(subset=["request_text", "suburb", "date_reported"])
+    no_duplicate_data = dataframe.drop_duplicates(subset=["request_text", "suburb", "date_reported"])
 
     return no_duplicate_data
-    
+
+
 def clean_data(dataframe):
     """Cleans the text columns to strip excess whitespace and convert to lowercase.
     Checks the request_text column for empty data and replaces them with an empty string.
@@ -35,7 +33,6 @@ def clean_data(dataframe):
     if dataframe["request_text"].isna().any():
         dataframe["request_text"] = dataframe["request_text"].fillna("")
         
-
     return dataframe
 
 
@@ -46,7 +43,5 @@ if __name__ == "__main__":
 
     clean_df = clean_data(copy_df)
     clean_df = check_duplicate_data(clean_df)
-
-    print(clean_df)
 
     clean_df.to_csv(new_file_path, index=False)
