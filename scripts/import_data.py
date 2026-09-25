@@ -1,8 +1,7 @@
 import pandas as pd
 
-new_file_path = "./data/raw/clean_data.csv"
+new_file_path = "./data/clean/clean_data.csv"
 
-df = pd.read_csv("./data/raw/raw_data.csv")
 
 def check_duplicate_data(dataframe):
     """ Removed duplicate data from the provided dataframe.
@@ -30,13 +29,20 @@ def clean_data(dataframe):
     Returns:
         A dataframe with cleaned data.
     """
-    clean_data = dataframe["request_text"].str.lower()
-    print(clean_data)
-    # clean_data["request_text"].str.strip()
+    dataframe["request_text"] = dataframe["request_text"].str.strip().str.lower()
+    dataframe["suburb"] = dataframe["suburb"].str.strip().str.lower()
 
-    return clean_data
+    return dataframe
+
 
 if __name__ == "__main__":
-    clean_df = check_duplicate_data(df)
-    # print(clean_df)
-    clean_data(clean_df)
+    df = pd.read_csv("./data/raw/raw_data.csv")
+
+    copy_df = df.copy()
+    
+    clean_df = clean_data(copy_df)
+    clean_df = check_duplicate_data(clean_df)
+
+    print(clean_df)
+
+    clean_df.to_csv(new_file_path, index=False)
