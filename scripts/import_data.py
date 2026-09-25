@@ -5,7 +5,7 @@ new_file_path = "./data/clean/clean_data.csv"
 
 def check_duplicate_data(dataframe):
     """ Removed duplicate data from the provided dataframe.
-        Outputs new data to a new file.
+        
 
     Args:
         dataframe: The specified dataframe being checked.
@@ -21,8 +21,7 @@ def check_duplicate_data(dataframe):
     return no_duplicate_data
     
 def clean_data(dataframe):
-    """Cleans the request_text column in the dataframe by stripping it an removing excess whitespace.
-    
+    """Cleans the text columns to strip excess whitespace and convert to lowercase.
     Args:
         dataframe: The dataframe that is being cleaned.
 
@@ -39,7 +38,7 @@ if __name__ == "__main__":
     df = pd.read_csv("./data/raw/raw_data.csv")
 
     copy_df = df.copy()
-    
+
     clean_df = clean_data(copy_df)
     clean_df = check_duplicate_data(clean_df)
 
