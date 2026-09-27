@@ -37,4 +37,10 @@ if __name__ == "__main__":
     print(f"Accuracy: {accuracy * 100}%.\n")
     print(f"Classification Report:")
     print(classification_report(y_test, predictions))
+
+    pipleline_filename = "model/request_classifier_pipeline.joblib"
+    
+    joblib.dump(model, pipleline_filename)
+
+    print(f"Pipeline saved to {pipleline_filename}")
     
