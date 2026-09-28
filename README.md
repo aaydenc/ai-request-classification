@@ -17,7 +17,7 @@
 
 ### Setup
 
-> git clone https://github.com/aaydenc/ai-request-classification.git
+> git clone https://github.com/aaydenc/ai-request-classification.git  
 > cd ai-request-classification
 
 ## Usage
