@@ -22,9 +22,13 @@
 
 ## Usage
 
+### Import Data
+
 To import data for the model to use run:
 
 > python scripts/import_data.py
+
+### Train Model
 
 To train and view predictions run after data has been imported run:
 
