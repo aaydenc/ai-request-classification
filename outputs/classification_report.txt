@@ -1,0 +1,21 @@
+Predicted Results: 
+                                         request_text actual_catergory predicted_catergory
+66  water leak near the verge is running across th...            water               water
+63  standing water remains near the playground for...            water               water
+40  pothole developing near the intersection and d...             road                road
+71    broken playground equipment could cause injury.           safety              safety
+6   stormwater grate is loose and making loud nois...             road                road
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        road       1.00      0.75      0.86         4
+      safety       0.67      1.00      0.80         4
+       waste       1.00      0.75      0.86         4
+       water       1.00      1.00      1.00         4
+
+    accuracy                           0.88        16
+   macro avg       0.92      0.88      0.88        16
+weighted avg       0.92      0.88      0.88        16
+
+Accuracy: 87.5%.

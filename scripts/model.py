@@ -15,6 +15,14 @@ def save_model_to_disk():
 
     print(f"Pipeline saved to {pipleline_filename}")
 
+def save_output_to_file():
+    with open("./outputs/classification_report.txt", "w") as f:
+        print("Predicted Results: ", file=f)
+        print(results.head(), file=f)
+        print(f"\nClassification Report:" ,file=f)
+        print(classification_report(y_test, predictions), file=f)
+        print(f"Accuracy: {accuracy * 100}%.", file=f)
+
 if __name__ == "__main__":
     df = pd.read_csv(data_path)
 
@@ -39,9 +47,9 @@ if __name__ == "__main__":
         "predicted_catergory": predictions
     })
 
-    print(results)
-
-    print(f"Accuracy: {accuracy * 100}%.\n")
-    print(f"Classification Report:")
+    print("Predicted Results: ")
+    print(results.head())
+    print(f"\nClassification Report:")
     print(classification_report(y_test, predictions))
+    print(f"Accuracy: {accuracy * 100}%.")
 
