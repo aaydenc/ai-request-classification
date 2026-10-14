@@ -8,6 +8,13 @@ from sklearn.metrics import accuracy_score, classification_report
 
 data_path = "./data/clean/clean_data.csv"
 
+def save_model_to_disk():
+    pipleline_filename = "model/request_classifier_pipeline.joblib"
+    
+    joblib.dump(model, pipleline_filename)
+
+    print(f"Pipeline saved to {pipleline_filename}")
+
 if __name__ == "__main__":
     df = pd.read_csv(data_path)
 
@@ -38,9 +45,3 @@ if __name__ == "__main__":
     print(f"Classification Report:")
     print(classification_report(y_test, predictions))
 
-    pipleline_filename = "model/request_classifier_pipeline.joblib"
-    
-    joblib.dump(model, pipleline_filename)
-
-    print(f"Pipeline saved to {pipleline_filename}")
-    
