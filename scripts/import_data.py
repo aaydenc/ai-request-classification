@@ -26,7 +26,7 @@ def clean_data(dataframe):
         A dataframe with cleaned data.
     """
     dataframe["request_text"] = dataframe["request_text"].str.strip().str.lower()
-
+    
     if dataframe["request_text"].isna().any():
         dataframe["request_text"] = dataframe["request_text"].fillna("")
         
