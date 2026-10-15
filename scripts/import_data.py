@@ -17,7 +17,7 @@ def check_duplicate_data(dataframe):
 
 
 def clean_data(dataframe):
-    """Cleans the text columns to strip excess whitespace and convert to lowercase.
+    """Cleans the request_text column to strip excess whitespace and convert to lowercase.
     Checks the request_text column for empty data and replaces them with an empty string.
     Args:
         dataframe: The dataframe that is being cleaned.
@@ -26,7 +26,6 @@ def clean_data(dataframe):
         A dataframe with cleaned data.
     """
     dataframe["request_text"] = dataframe["request_text"].str.strip().str.lower()
-    dataframe["suburb"] = dataframe["suburb"].str.strip().str.lower()
 
     if dataframe["request_text"].isna().any():
         dataframe["request_text"] = dataframe["request_text"].fillna("")
