@@ -6,7 +6,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score, classification_report
 
-data_path = "./data/clean/clean_data.csv"
+DATA_PATH = "./data/clean/clean_data.csv"
 
 def save_model_to_disk():
     pipleline_filename = "model/request_classifier_pipeline.joblib"
@@ -24,7 +24,7 @@ def save_output_to_file():
         print(f"Accuracy: {accuracy * 100}%.", file=f)
 
 if __name__ == "__main__":
-    df = pd.read_csv(data_path)
+    df = pd.read_csv(DATA_PATH)
 
     X = df["request_text"]
     y = df["category"]

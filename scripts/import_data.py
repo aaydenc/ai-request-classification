@@ -1,6 +1,7 @@
 import pandas as pd
 
 NEW_FILE_PATH = "./data/clean/clean_data.csv"
+RAW_DATA_PATH = "./data/raw/raw_data.csv"
 
 def check_duplicate_data(dataframe):
     """ Removed duplicate data from the provided dataframe.
@@ -34,7 +35,7 @@ def clean_data(dataframe):
 
 
 if __name__ == "__main__":
-    df = pd.read_csv("./data/raw/raw_data.csv")
+    df = pd.read_csv(RAW_DATA_PATH)
 
     copy_df = df.copy()
 
