@@ -11,7 +11,7 @@ DATA_PATH = "./data/clean/clean_data.csv"
 def save_model_to_disk():
     pipleline_filename = "model/request_classifier_pipeline.joblib"
     
-    joblib.dump(model, pipleline_filename)
+    joblib.dump(tf_pipeline, pipleline_filename)
 
     print(f"Pipeline saved to {pipleline_filename}")
 
@@ -52,4 +52,3 @@ if __name__ == "__main__":
     print(f"\nClassification Report:")
     print(classification_report(y_test, predictions))
     print(f"Accuracy: {accuracy * 100}%.")
-
