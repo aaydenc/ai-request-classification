@@ -29,7 +29,7 @@ def clean_data(dataframe):
     dataframe["request_text"] = dataframe["request_text"].str.strip().str.lower()
     
     if dataframe["request_text"].isna().any():
-        dataframe["request_text"] = dataframe["request_text"].fillna("")
+        dataframe["request_text"] = dataframe["request_text"].fillna(" ")
         
     return dataframe
 
