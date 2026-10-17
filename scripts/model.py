@@ -11,14 +11,20 @@ DATA_PATH = "./data/clean/clean_data.csv"
 def save_model_to_disk():
     pipleline_filename = "model/request_classifier_pipeline.joblib"
     
-    joblib.dump(model, pipleline_filename)
+    joblib.dump(tf_pipeline, pipleline_filename)
 
     print(f"Pipeline saved to {pipleline_filename}")
 
 def save_output_to_file():
     with open("./outputs/classification_report.txt", "w") as f:
-        print("Predicted Results: ", file=f)
-        print(results.head(), file=f)
+        print("Predicted Results:\n", file=f)
+        
+        for _, row in results.head(5).iterrows():
+            print(f"Request: {row['request_text']}", file=f)
+            print(f"Actual Category: {row['actual_catergory']}", file=f)
+            print(f"Predicted Category: {row['predicted_catergory']}", file=f)
+            print("-" * 50, file=f)
+
         print(f"\nClassification Report:" ,file=f)
         print(classification_report(y_test, predictions), file=f)
         print(f"Accuracy: {accuracy * 100}%.", file=f)
@@ -47,9 +53,17 @@ if __name__ == "__main__":
         "predicted_catergory": predictions
     })
 
-    print("Predicted Results: ")
-    print(results.head())
-    print(f"\nClassification Report:")
-    print(classification_report(y_test, predictions))
-    print(f"Accuracy: {accuracy * 100}%.")
+    save_output_to_file()
+
+    # print("Predicted Results: ")
+    # for _, row in results.head(5).iterrows():
+    #         print(f"Request: {row['request_text']}")
+    #         print(f"Actual Category: {row['actual_catergory']}")
+    #         print(f"Predicted Category: {row['predicted_catergory']}")
+    #         print("-" * 50)
+    # print(f"\nClassification Report:")
+    # print(classification_report(y_test, predictions))
+    # print(f"Accuracy: {accuracy * 100}%.")
+
+    
 
