@@ -1,10 +1,25 @@
-Predicted Results: 
-                                         request_text actual_catergory predicted_catergory
-66  water leak near the verge is running across th...            water               water
-63  standing water remains near the playground for...            water               water
-40  pothole developing near the intersection and d...             road                road
-71    broken playground equipment could cause injury.           safety              safety
-6   stormwater grate is loose and making loud nois...             road                road
+Predicted Results:
+
+Request: water leak near the verge is running across the footpath.
+Actual Category: water
+Predicted Category: water
+--------------------------------------------------
+Request: standing water remains near the playground for days.
+Actual Category: water
+Predicted Category: water
+--------------------------------------------------
+Request: pothole developing near the intersection and drivers are swerving around it.
+Actual Category: road
+Predicted Category: road
+--------------------------------------------------
+Request: broken playground equipment could cause injury.
+Actual Category: safety
+Predicted Category: safety
+--------------------------------------------------
+Request: stormwater grate is loose and making loud noise when buses pass.
+Actual Category: road
+Predicted Category: road
+--------------------------------------------------
 
 Classification Report:
               precision    recall  f1-score   support
