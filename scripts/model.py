@@ -9,6 +9,7 @@ from sklearn.metrics import accuracy_score, classification_report
 DATA_PATH = "./data/clean/clean_data.csv"
 
 def save_model_to_disk():
+    """Saves model pipeline to disk."""
     pipleline_filename = "model/request_classifier_pipeline.joblib"
     
     joblib.dump(tf_pipeline, pipleline_filename)
@@ -16,6 +17,7 @@ def save_model_to_disk():
     print(f"Pipeline saved to {pipleline_filename}")
 
 def save_output_to_file():
+    """Saves classification report to a file."""
     with open("./outputs/classification_report.txt", "w") as f:
         print("Predicted Results: ", file=f)
         print(results.head(), file=f)

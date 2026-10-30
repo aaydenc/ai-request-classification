@@ -10,6 +10,11 @@ MODEL = "model/request_classifier_pipeline.joblib"
 model = joblib.load(MODEL)
 
 def get_categories():
+    """ Reads the CSV file and returns all the unique categories
+
+    Returns: 
+        A dataframe containing the unique categories.
+    """
     df = pd.read_csv(CLEAN_CSV_PATH)
     categories = df["category"].drop_duplicates().to_list()
 
