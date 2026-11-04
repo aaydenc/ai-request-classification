@@ -87,4 +87,4 @@ if __name__ == "__main__":
         "predicted_category" : svc_predictions
     })
 
-    save_output_to_file()
+    print_classification_reports()
