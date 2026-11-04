@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, field_validator
 import pandas as pd
 import joblib
 import numpy as np
@@ -23,7 +23,15 @@ def get_categories():
 app = FastAPI()
 
 class PredicitonRequest(BaseModel):
-    request_text: str
+    request_text: str = Field(min_length=1)
+
+    @field_validator("request_text")
+    @classmethod
+    def validate_request_text(cls, value):
+        if not value.strip():
+            raise ValueError("Request text cannot be empty")
+
+        return value
 
 @app.get("/health")
 async def root():
