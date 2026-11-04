@@ -32,7 +32,7 @@ async def root():
 @app.get("/categories")
 async def root():
     categories = get_categories()
-    return {"categories: ": categories}
+    return {"categories": categories}
 
 @app.post("/predict/")
 async def make_prediction(request: PredicitonRequest):
