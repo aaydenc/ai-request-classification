@@ -20,11 +20,19 @@ def save_model_to_disk():
 def save_output_to_file():
     """Saves classification reports to a file."""
     with open("./outputs/classification_report.txt", "w") as f:
-        print("Predicted Results: ", file=f)
-        print(results.head(), file=f)
-        print(f"\nClassification Report:" ,file=f)
-        print(classification_report(y_test, predictions), file=f)
-        print(f"Accuracy: {accuracy * 100}%.", file=f)
+        print("Predicted Results: ")
+        print(results.head())
+        print(f"\nClassification Report:")
+        print(classification_report(y_test, predictions))
+        print(f"Accuracy: {accuracy * 100}%.")
+    
+        print("-" * 100)
+    
+        print("SVC Predicted Results: ")
+        print(svc_results.head())
+        print(f"\nClassification Report:")
+        print(classification_report(y_test, svc_predictions))
+        print(f"Accuracy: {svc_accuracy * 100}%.")
 
 
 if __name__ == "__main__":
@@ -62,17 +70,5 @@ if __name__ == "__main__":
         "predicted_category" : svc_predictions
     })
 
-    print("Predicted Results: ")
-    print(results.head())
-    print(f"\nClassification Report:")
-    print(classification_report(y_test, predictions))
-    print(f"Accuracy: {accuracy * 100}%.")
-
-    print("-" * 100)
-
-    print("SVC Predicted Results: ")
-    print(svc_results.head())
-    print(f"\nClassification Report:")
-    print(classification_report(y_test, svc_predictions))
-    print(f"Accuracy: {svc_accuracy * 100}%.")
+    
     
