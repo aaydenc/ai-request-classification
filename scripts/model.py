@@ -20,11 +20,19 @@ def save_model_to_disk():
 def save_output_to_file():
     """Saves classification reports to a file."""
     with open("./outputs/classification_report.txt", "w") as f:
-        print("Predicted Results: ")
-        print(results.head())
-        print(f"\nClassification Report:")
-        print(classification_report(y_test, predictions))
-        print(f"Accuracy: {accuracy * 100}%.")
+        f.write("Predicted Results: \n")
+        f.write(str(results.head()))
+        f.write(f"\nClassification Report:")
+        f.write(classification_report(y_test, predictions))
+        f.write(f"Accuracy: {accuracy * 100}%.\n")
+        f.write("-" * 100)
+        f.write("\nSVC Predicted Results: \n")
+        f.write(str(svc_results.head()))
+        f.write(f"\nClassification Report:")
+        f.write(classification_report(y_test, svc_predictions))
+        f.write(f"Accuracy: {svc_accuracy * 100}%.")
+
+    print("Output saved to file")
         
 
 def print_classification_reports():
@@ -79,4 +87,4 @@ if __name__ == "__main__":
         "predicted_category" : svc_predictions
     })
 
-    print_classification_reports()
+    save_output_to_file()
