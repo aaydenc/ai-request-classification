@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score, classification_report
-from sklearn.svm import LinearSVC
+from sklearn.svm import SVC
 
 DATA_PATH = "./data/clean/clean_data.csv"
 
@@ -51,6 +51,13 @@ def print_classification_reports():
     print(classification_report(y_test, svc_predictions))
     print(f"Accuracy: {svc_accuracy * 100}%.")
 
+    print("Identical predictions:",
+      (predictions == svc_predictions).all())
+
+    print("Number of matching predictions:",
+        (predictions == svc_predictions).sum(),
+        "out of", len(predictions))
+
 
 if __name__ == "__main__":
     df = pd.read_csv(DATA_PATH)
@@ -63,7 +70,7 @@ if __name__ == "__main__":
     lr_pipeline = Pipeline([('tfidf', TfidfVectorizer()), ('lr', LogisticRegression())])
     lr_pipeline.fit(X_train, y_train)
 
-    svc_pipeline = Pipeline([('tfidf', TfidfVectorizer()), ('svc', LinearSVC())])
+    svc_pipeline = Pipeline([('tfidf', TfidfVectorizer()), ('svc', SVC())])
     svc_pipeline.fit(X_train, y_train)
 
     predictions = lr_pipeline.predict(X_test)
