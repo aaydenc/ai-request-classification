@@ -14,15 +14,49 @@ A simple logistic regression model designed to classify different public service
 
 - Python 3.12+
 - pip
+- git
 
 ### Setup
 
 Clone the repository and install the required dependencies:
 
+#### 1. Clone the repository
+
 ```bash
 git clone https://github.com/aaydenc/ai-request-classification.git
 cd ai-request-classification
+```
+
+#### 2. Create a virtual enviroment
+
+```bash
+python -m venv .venv
+```
+
+#### 3. Activate the virtual envrioment
+
+Widnows PowerShell:
+
+```bash
+.venv\Scripts\Activate.ps1
+```
+
+macOS/Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+#### 4. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
+
+#### 5. Run the API
+
+```bash
+uvicorn scripts.api:app --reload
 ```
 
 ## Usage
