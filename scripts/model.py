@@ -32,6 +32,10 @@ def save_output_to_file():
         f.write(classification_report(y_test, svc_predictions))
         f.write(f"Accuracy: {svc_accuracy * 100}%.")
 
+        f.write(f"\nIdentical predictions: {(predictions == svc_predictions).all()}")
+        
+        f.write(f"\nNumber of matching predictions: {(predictions == svc_predictions).sum()} out of {len(predictions)}")
+
     print("Output saved to file")
         
 

@@ -35,3 +35,5 @@ Classification Report:              precision    recall  f1-score   support
    macro avg       0.92      0.88      0.88        16
 weighted avg       0.92      0.88      0.88        16
 Accuracy: 87.5%.
+Identical predictions: True
+Number of matching predictions: 16 out of 16
