@@ -5,7 +5,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score, classification_report
-from sklearn.svm import SVC
 
 DATA_PATH = "./data/clean/clean_data.csv"
 
@@ -26,15 +25,6 @@ def save_output_to_file():
         f.write(classification_report(y_test, predictions))
         f.write(f"Accuracy: {accuracy * 100}%.\n")
         f.write("-" * 100)
-        f.write("\nSVC Predicted Results: \n")
-        f.write(str(svc_results.head()))
-        f.write(f"\nClassification Report:")
-        f.write(classification_report(y_test, svc_predictions))
-        f.write(f"Accuracy: {svc_accuracy * 100}%.")
-
-        f.write(f"\nIdentical predictions: {(predictions == svc_predictions).all()}")
-        
-        f.write(f"\nNumber of matching predictions: {(predictions == svc_predictions).sum()} out of {len(predictions)}")
 
     print("Output saved to file")
         
@@ -46,21 +36,7 @@ def print_classification_reports():
     print(f"\nClassification Report:")
     print(classification_report(y_test, predictions))
     print(f"Accuracy: {accuracy * 100}%.")
-
     print("-" * 100)
-
-    print("SVC Predicted Results: ")
-    print(svc_results.head())
-    print(f"\nClassification Report:")
-    print(classification_report(y_test, svc_predictions))
-    print(f"Accuracy: {svc_accuracy * 100}%.")
-
-    print("Identical predictions:",
-      (predictions == svc_predictions).all())
-
-    print("Number of matching predictions:",
-        (predictions == svc_predictions).sum(),
-        "out of", len(predictions))
 
 
 if __name__ == "__main__":
@@ -74,25 +50,14 @@ if __name__ == "__main__":
     lr_pipeline = Pipeline([('tfidf', TfidfVectorizer()), ('lr', LogisticRegression())])
     lr_pipeline.fit(X_train, y_train)
 
-    svc_pipeline = Pipeline([('tfidf', TfidfVectorizer()), ('svc', SVC())])
-    svc_pipeline.fit(X_train, y_train)
-
     predictions = lr_pipeline.predict(X_test)
-    svc_predictions = svc_pipeline.predict(X_test)
     
     accuracy = accuracy_score(y_test, predictions)
-    svc_accuracy = accuracy_score(y_test, svc_predictions)
     
     results = pd.DataFrame({
         "request_text": X_test,
         "actual_category": y_test,
         "predicted_category": predictions
-    })
-
-    svc_results = pd.DataFrame({
-        "request_text": X_test,
-        "actual_category": y_test,
-        "predicted_category" : svc_predictions
     })
 
     print_classification_reports()
