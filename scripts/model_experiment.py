@@ -239,3 +239,5 @@ if __name__ == "__main__":
                         "actual_category": y_test,
                         "predicted_category": adjust_6_predictions
                     })
+
+    print_classification_reports()
