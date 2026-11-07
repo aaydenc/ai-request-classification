@@ -1,39 +1,19 @@
 Predicted Results: 
                                          request_text actual_category predicted_category
-66  water leak near the verge is running across th...           water              water
-63  standing water remains near the playground for...           water              water
-40  pothole developing near the intersection and d...            road               road
-71    broken playground equipment could cause injury.          safety             safety
-6   stormwater grate is loose and making loud nois...            road               road
+15  green waste bags split open and rubbish has sc...           waste              waste
+32  graffiti on community centre wall has offensiv...          safety              waste
+37     bus shelter glass panel cracked and dangerous.          safety             safety
+3   deep crack forming on footpath beside the prim...            road              waste
+59  overhanging branch above the footpath looks un...          safety             safety
 Classification Report:              precision    recall  f1-score   support
 
-        road       1.00      0.75      0.86         4
-      safety       0.67      1.00      0.80         4
-       waste       1.00      0.75      0.86         4
-       water       1.00      1.00      1.00         4
+        road       1.00      0.33      0.50         3
+      safety       1.00      0.67      0.80         3
+       waste       0.60      1.00      0.75         3
+       water       0.75      1.00      0.86         3
 
-    accuracy                           0.88        16
-   macro avg       0.92      0.88      0.88        16
-weighted avg       0.92      0.88      0.88        16
-Accuracy: 87.5%.
+    accuracy                           0.75        12
+   macro avg       0.84      0.75      0.73        12
+weighted avg       0.84      0.75      0.73        12
+Accuracy: 75.0%.
 ----------------------------------------------------------------------------------------------------
-SVC Predicted Results: 
-                                         request_text actual_category predicted_category
-66  water leak near the verge is running across th...           water              water
-63  standing water remains near the playground for...           water              water
-40  pothole developing near the intersection and d...            road               road
-71    broken playground equipment could cause injury.          safety             safety
-6   stormwater grate is loose and making loud nois...            road               road
-Classification Report:              precision    recall  f1-score   support
-
-        road       1.00      0.75      0.86         4
-      safety       0.67      1.00      0.80         4
-       waste       1.00      0.75      0.86         4
-       water       1.00      1.00      1.00         4
-
-    accuracy                           0.88        16
-   macro avg       0.92      0.88      0.88        16
-weighted avg       0.92      0.88      0.88        16
-Accuracy: 87.5%.
-Identical predictions: True
-Number of matching predictions: 16 out of 16

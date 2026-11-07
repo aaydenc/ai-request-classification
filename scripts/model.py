@@ -60,4 +60,4 @@ if __name__ == "__main__":
         "predicted_category": predictions
     })
 
-    print_classification_reports()
+    save_output_to_file()
