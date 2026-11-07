@@ -139,3 +139,19 @@ def test_predict_empty_request():
     )
 
     assert response.status_code == 422
+
+def test_predict_whitespace_request():
+    response = client.post(
+        "/predict",
+        json={"request_text": "   "}
+    )
+
+    assert response.status_code == 422
+
+def test_predict_invalid_input_type():
+    response = client.post(
+        "/predict",
+        json={"request_text": 123}
+    )
+
+    assert response.status_code == 422
