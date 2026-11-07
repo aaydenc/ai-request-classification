@@ -12,7 +12,7 @@ def check_duplicate_data(dataframe):
     Returns:
         A dataframe with duplicate data corrected.
     """
-    no_duplicate_data = dataframe.drop_duplicates(subset=["request_text"])
+    no_duplicate_data = dataframe.drop_duplicates(subset=["request_text", "suburb", "date_reported"])
 
     return no_duplicate_data
 
@@ -41,9 +41,5 @@ if __name__ == "__main__":
 
     clean_df = clean_data(copy_df)
     clean_df = check_duplicate_data(clean_df)
-
-    print(f"Original records: {len(df)}")
-    print(f"Cleaned records: {len(clean_df)}")
-    print(clean_df["category"].value_counts())
 
     clean_df.to_csv(NEW_FILE_PATH, index=False)
