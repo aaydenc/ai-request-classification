@@ -23,6 +23,7 @@ def get_categories() -> list[str]:
 app = FastAPI(title="Public Request Classification API",
     description="An API for classifying public service requests.",
     version="1.0.0")
+
 categories = get_categories()
 
 class PredictionRequest(BaseModel):
