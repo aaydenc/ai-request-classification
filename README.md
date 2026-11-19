@@ -37,7 +37,7 @@ cd ai-request-classification
 python -m venv .venv
 ```
 
-#### 3. Activate the virtual envrioment
+#### 3. Activate the virtual environment
 
 Windows PowerShell:
 
@@ -87,6 +87,8 @@ To evaluate different model configurations and compare their performance, run:
 python scripts/model_experiment.py
 ```
 
+This script evaluates alternative model configurations and compares their performance against the baseline model. It does not overwrite the saved model pipeline.
+
 ### Run the API
 
 After the model has been trained and saved, start the FastAPI application:
@@ -129,7 +131,7 @@ Example response:
 
 ```json
 {
-  "request_text": "There is a pothole developing in the road"
+  "request_text": "There is a pothole developing in the road",
   "predicted_category": "road",
   "confidence_score": 0.85
 }
@@ -139,7 +141,7 @@ Note: The confidence score shown is an illustrative example and may differ depen
 
 ## API Validation
 
-The API validates incoming prediction requests. Invalid requests, such as empty request text, missing fields or whitespace-only input, return a 422 Unprocessable Entity response.
+The API validates incoming prediction requests. Invalid requests, such as empty request text, missing fields, whitespace-only input, or invalid input types, return a 422 Unprocessable Entity response.
 
 ## Testing
 
@@ -150,7 +152,7 @@ The tests cover:
 - API health checks.
 - Supported request categories.
 - Valid predictions across all four categories.
-- Invalid prediciton requests and input validation.
+- Invalid predicton requests and input validation.
 
 To run the tests, execute:
 
