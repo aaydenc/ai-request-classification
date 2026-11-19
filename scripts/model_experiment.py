@@ -102,7 +102,7 @@ if __name__ == "__main__":
     print("Baseline Individual fold F1 scores:", baseline_scores["test_f1_macro"])
     print("Baseline Mean accuracy:", baseline_scores["test_accuracy"].mean())
     print("Baseline Mean F1:", baseline_scores["test_f1_macro"].mean())
-    print("Baseline accuracy std", baseline_scores["test_accuracy"].std())
+    print("Baseline accuracy std:", baseline_scores["test_accuracy"].std())
     print("Baseline F1 std:", baseline_scores["test_f1_macro"].std())
 
     # Logistic Regression model with C value of 0.1
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     print("EXP 1 (C=0.1) Individual fold F1 scores:", exp_1_scores["test_f1_macro"])
     print("EXP 1 (C=0.1) Mean accuracy:", exp_1_scores["test_accuracy"].mean())
     print("EXP 1 (C=0.1) Mean F1:", exp_1_scores["test_f1_macro"].mean())
-    print("EXP 1 (C=0.1) accuracy std", exp_1_scores["test_accuracy"].std())
+    print("EXP 1 (C=0.1) accuracy std:", exp_1_scores["test_accuracy"].std())
     print("EXP 1 (C=0.1) F1 std:", exp_1_scores["test_f1_macro"].std())
 
     # Logistic Regression model with C value of 0.5
@@ -130,7 +130,7 @@ if __name__ == "__main__":
     print("EXP 2 (C=0.5) Individual fold F1 scores:", exp_2_scores["test_f1_macro"])
     print("EXP 2 (C=0.5) Mean accuracy:", exp_2_scores["test_accuracy"].mean())
     print("EXP 2 (C=0.5) Mean F1:", exp_2_scores["test_f1_macro"].mean())
-    print("EXP 2 (C=0.5) accuracy std", exp_2_scores["test_accuracy"].std())
+    print("EXP 2 (C=0.5) accuracy std:", exp_2_scores["test_accuracy"].std())
     print("EXP 2 (C=0.5) F1 std:", exp_2_scores["test_f1_macro"].std())
 
     # Logistic Regression model with C value of 2.0
@@ -144,7 +144,7 @@ if __name__ == "__main__":
     print("EXP 3 (C=2.0) Individual fold F1 scores:", exp_3_scores["test_f1_macro"])
     print("EXP 3 (C=2.0) Mean accuracy:", exp_3_scores["test_accuracy"].mean())
     print("EXP 3 (C=2.0) Mean F1:", exp_3_scores["test_f1_macro"].mean())
-    print("EXP 3 (C=2.0) accuracy std", exp_3_scores["test_accuracy"].std())
+    print("EXP 3 (C=2.0) accuracy std:", exp_3_scores["test_accuracy"].std())
     print("EXP 3 (C=2.0) F1 std:", exp_3_scores["test_f1_macro"].std())
 
     # Logistic Regression model with Adjusted TF-IDF Vectorizer to have ngram_range of 1, 2
@@ -158,7 +158,7 @@ if __name__ == "__main__":
     print("EXP 4 (ngram_range=1,2) Individual fold F1 scores:", exp_4_scores["test_f1_macro"])
     print("EXP 4 (ngram_range=1,2) Mean accuracy:", exp_4_scores["test_accuracy"].mean())
     print("EXP 4 (ngram_range=1,2) Mean F1:", exp_4_scores["test_f1_macro"].mean())
-    print("EXP 4 (ngram_range=1,2) accuracy std", exp_4_scores["test_accuracy"].std())
+    print("EXP 4 (ngram_range=1,2) accuracy std:", exp_4_scores["test_accuracy"].std())
     print("EXP 4 (ngram_range=1,2) F1 std:", exp_4_scores["test_f1_macro"].std())
 
     # Logistic Regression model with Adjusted TF-IDF Vectorizer to have ngram_range 1, 3
@@ -172,7 +172,7 @@ if __name__ == "__main__":
     print("EXP 5 (ngram_range=1,3) Individual fold F1 scores:", exp_5_scores["test_f1_macro"])
     print("EXP 5 (ngram_range=1,3) Mean accuracy:", exp_5_scores["test_accuracy"].mean())
     print("EXP 5 (ngram_range=1,3) Mean F1:", exp_5_scores["test_f1_macro"].mean())
-    print("EXP 5 (ngram_range=1,3) accuracy std", exp_5_scores["test_accuracy"].std())
+    print("EXP 5 (ngram_range=1,3) accuracy std:", exp_5_scores["test_accuracy"].std())
     print("EXP 5 (ngram_range=1,3) F1 std:", exp_5_scores["test_f1_macro"].std())
 
     # Logistic Regress model with Adjusted TF-IDF Vectorizer to have sublinear term frequencies
@@ -186,7 +186,7 @@ if __name__ == "__main__":
     print("EXP 6 (sublinear_tf=True) Individual fold F1 scores:", exp_6_scores["test_f1_macro"])
     print("EXP 6 (sublinear_tf=True) Mean accuracy:", exp_6_scores["test_accuracy"].mean())
     print("EXP 6 (sublinear_tf=True) Mean F1:", exp_6_scores["test_f1_macro"].mean())
-    print("EXP 6 (sublinear_tf=True) accuracy std", exp_6_scores["test_accuracy"].std())
+    print("EXP 6 (sublinear_tf=True) accuracy std:", exp_6_scores["test_accuracy"].std())
     print("EXP 6 (sublinear_tf=True) F1 std:", exp_6_scores["test_f1_macro"].std())
     
     predictions = lr_pipeline.predict(X_test)
