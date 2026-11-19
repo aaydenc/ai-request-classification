@@ -7,22 +7,25 @@ import numpy as np
 CLEAN_CSV_PATH = "./data/clean/clean_data.csv"
 MODEL = "model/request_classifier_pipeline.joblib"
 
-model = joblib.load(MODEL)
+pipeline = joblib.load(MODEL)
 
-def get_categories():
+def get_categories() -> list[str]:
     """ Reads the CSV file and returns all the unique categories
 
     Returns: 
         A dataframe containing the unique categories.
     """
     df = pd.read_csv(CLEAN_CSV_PATH)
-    categories = df["category"].drop_duplicates().to_list()
+    categories = df["category"].dropna().drop_duplicates().to_list()
 
     return categories
 
-app = FastAPI()
+app = FastAPI(title="Public Request Classification API",
+    description="An API for classifying public service requests.",
+    version="1.0.0")
+categories = get_categories()
 
-class PredicitonRequest(BaseModel):
+class PredictonRequest(BaseModel):
     request_text: str = Field(min_length=1)
 
     @field_validator("request_text")
@@ -33,25 +36,33 @@ class PredicitonRequest(BaseModel):
 
         return value
 
+class PredictionResponse(BaseModel):
+    """Response returned by the prediction endpoint."""
+
+    request_text: str
+    predicted_category: str
+    confidence_score: float
+
+
 @app.get("/health")
-async def root():
+def health_check():
     return {"status" : "ok"}
 
+
 @app.get("/categories")
-async def root():
-    categories = get_categories()
+def list_categories():
     return {"categories": categories}
 
-@app.post("/predict/")
-async def make_prediction(request: PredicitonRequest):
+
+@app.post("/predict", response_model=PredictionResponse)
+def make_prediction(request: PredictonRequest):
     request_data = [request.request_text]
 
-    prediction = model.predict(request_data)
+    prediction = pipeline.predict(request_data)
 
-    probabilities = model.predict_proba(request_data)
+    probabilities = pipeline.predict_proba(request_data)
 
-    highest_prob_index = np.argmax(probabilities[0])
-    confidence_score = float(probabilities[0][highest_prob_index])
+    confidence_score = float(probabilities[0].max())
 
     return {"request_text": request.request_text,
             "predicted_category": prediction[0],
