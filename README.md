@@ -57,38 +57,51 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-#### 5. Run the API
-
-```bash
-uvicorn scripts.api:app --reload
-```
-
 ## Usage
 
 ### Import Data
 
-To import data for the model to use run:
+Import and preprocess the raw dataset:
 
 ```bash
 python scripts/import_data.py
 ```
 
+This processes the raw dataset and saves the cleaned data for model training.
+
 ### Train Model
 
-To train and view predictions run after data has been imported run:
+After importing the data, train the classification model:
 
 ```bash
 python scripts/model.py
 ```
 
-### Testing API
+This trains the Logistic Regression pipeline, evaluates its performance and saves the trained model using joblib.
 
-Automated API tests are implementd using pytest and FastAPI TestClient.
-To run the tests run:
+## Experiment with Model Configurations
+
+To evaluate different model configurations and compare their performance, run:
 
 ```bash
-python -m pytest -v
+python scripts/model_experiment.py
 ```
+
+### Run the API
+
+After the model has been trained and saved, start the FastAPI application:
+
+```bash
+uvicorn scripts.api:app --reload
+```
+
+The API will be available at:
+
+http://127.0.0.1:8000
+
+Interactive API documentation is available at:
+
+http://127.0.0.1:8000/docs
 
 ## API Endpoints
 
@@ -112,9 +125,35 @@ Send a POST request to `/predict` with the following JSON body:
 
 The API returns the predicted category and confidence score.
 
+Example response:
+
 ```json
 {
+  "request_text": "There is a pothole developing in the road"
   "predicted_category": "road",
   "confidence_score": 0.85
 }
+```
+
+Note: The confidence score shown is an illustrative example and may differ depending on the trained model.
+
+## API Validation
+
+The API validates incoming prediction requests. Invalid requests, such as empty request text, missing fields or whitespace-only input, return a 422 Unprocessable Entity response.
+
+## Testing
+
+Automated API tests are implemented using pytest and FastAPI TestClient.
+
+The tests cover:
+
+- API health checks.
+- Supported request categories.
+- Valid predictions across all four categories.
+- Invalid prediciton requests and input validation.
+
+To run the tests, execute:
+
+```bash
+python -m pytest -v
 ```
