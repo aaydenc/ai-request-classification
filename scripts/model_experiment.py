@@ -9,8 +9,8 @@ DATA_PATH = "./data/clean/clean_data.csv"
 
 def print_classification_reports():
     """Prints the classification reports to the terminal."""
-    print("Basline Model Results (C value 1.0): ")
-    print(results)
+    print("Baseline Model Results (C value 1.0): ")
+    print(baseline_results)
     print(f"\nClassification Report:")
     print(classification_report(y_test, predictions))
     print(f"Accuracy: {accuracy * 100}%.\n")
@@ -21,7 +21,7 @@ def print_classification_reports():
     print(adjust_1_results)
     print(f"\nClassification Report:")
     print(classification_report(y_test, adjust_1_predictions))
-    print(f"Accuracy: {adjust_1_predictions_accr * 100}%.")
+    print(f"Accuracy: {adjust_1_accuracy * 100}%.")
 
     print("-" * 100)
     
@@ -29,7 +29,7 @@ def print_classification_reports():
     print(adjust_2_results)
     print(f"\nClassification Report:")
     print(classification_report(y_test, adjust_2_predictions))
-    print(f"Accuracy: {adjust_2_predictions_accr * 100}%.")
+    print(f"Accuracy: {adjust_2_accuracy * 100}%.")
 
     print("-" * 100)
         
@@ -37,7 +37,7 @@ def print_classification_reports():
     print(adjust_3_results)
     print(f"\nClassification Report:")
     print(classification_report(y_test, adjust_3_predictions))
-    print(f"Accuracy: {adjust_3_predictions_accr * 100}%.")
+    print(f"Accuracy: {adjust_3_accuracy * 100}%.")
 
     print("-" * 100)
             
@@ -45,7 +45,7 @@ def print_classification_reports():
     print(adjust_4_results)
     print(f"\nClassification Report:")
     print(classification_report(y_test, adjust_4_predictions))
-    print(f"Accuracy: {adjust_4_predictions_accr * 100}%.")
+    print(f"Accuracy: {adjust_4_accuracy * 100}%.")
 
     print("-" * 100)
                 
@@ -53,7 +53,7 @@ def print_classification_reports():
     print(adjust_5_results)
     print(f"\nClassification Report:")
     print(classification_report(y_test, adjust_5_predictions))
-    print(f"Accuracy: {adjust_5_predictions_accr * 100}%.")
+    print(f"Accuracy: {adjust_5_accuracy * 100}%.")
 
     print("-" * 100)
 
@@ -61,7 +61,7 @@ def print_classification_reports():
     print(adjust_6_results)
     print(f"\nClassification Report:")
     print(classification_report(y_test, adjust_6_predictions))
-    print(f"Accuracy: {adjust_6_predictions_accr * 100}%.")
+    print(f"Accuracy: {adjust_6_accuracy * 100}%.")
 
     print("-" * 100)
 
@@ -103,6 +103,7 @@ if __name__ == "__main__":
     print("Baseline Mean accuracy:", baseline_scores["test_accuracy"].mean())
     print("Baseline Mean F1:", baseline_scores["test_f1_macro"].mean())
     print("Baseline accuracy std", baseline_scores["test_accuracy"].std())
+    print("Baseline F1 std:", baseline_scores["test_f1_macro"].std())
 
     # Logistic Regression model with C value of 0.1
     lr_adjust_1 = Pipeline([('tfidf', TfidfVectorizer()), ('lr', LogisticRegression(C=0.1))])
@@ -116,6 +117,7 @@ if __name__ == "__main__":
     print("EXP 1 (C=0.1) Mean accuracy:", exp_1_scores["test_accuracy"].mean())
     print("EXP 1 (C=0.1) Mean F1:", exp_1_scores["test_f1_macro"].mean())
     print("EXP 1 (C=0.1) accuracy std", exp_1_scores["test_accuracy"].std())
+    print("EXP 1 (C=0.1) F1 std:", exp_1_scores["test_f1_macro"].std())
 
     # Logistic Regression model with C value of 0.5
     lr_adjust_2 = Pipeline([('tfidf', TfidfVectorizer()), ('lr', LogisticRegression(C=0.5))])
@@ -129,8 +131,9 @@ if __name__ == "__main__":
     print("EXP 2 (C=0.5) Mean accuracy:", exp_2_scores["test_accuracy"].mean())
     print("EXP 2 (C=0.5) Mean F1:", exp_2_scores["test_f1_macro"].mean())
     print("EXP 2 (C=0.5) accuracy std", exp_2_scores["test_accuracy"].std())
+    print("EXP 2 (C=0.5) F1 std:", exp_2_scores["test_f1_macro"].std())
 
-    # Lofistic Regression model with C value of 2.0
+    # Logistic Regression model with C value of 2.0
     lr_adjust_3 = Pipeline([('tfidf', TfidfVectorizer()), ('lr', LogisticRegression(C=2.0))])
     lr_adjust_3.fit(X_train, y_train)
 
@@ -142,6 +145,7 @@ if __name__ == "__main__":
     print("EXP 3 (C=2.0) Mean accuracy:", exp_3_scores["test_accuracy"].mean())
     print("EXP 3 (C=2.0) Mean F1:", exp_3_scores["test_f1_macro"].mean())
     print("EXP 3 (C=2.0) accuracy std", exp_3_scores["test_accuracy"].std())
+    print("EXP 3 (C=2.0) F1 std:", exp_3_scores["test_f1_macro"].std())
 
     # Logistic Regression model with Adjusted TF-IDF Vectorizer to have ngram_range of 1, 2
     lr_adjust_4 = Pipeline([('tfidf', TfidfVectorizer(ngram_range=(1, 2))), ('lr', LogisticRegression())])
@@ -155,6 +159,7 @@ if __name__ == "__main__":
     print("EXP 4 (ngram_range=1,2) Mean accuracy:", exp_4_scores["test_accuracy"].mean())
     print("EXP 4 (ngram_range=1,2) Mean F1:", exp_4_scores["test_f1_macro"].mean())
     print("EXP 4 (ngram_range=1,2) accuracy std", exp_4_scores["test_accuracy"].std())
+    print("EXP 4 (ngram_range=1,2) F1 std:", exp_4_scores["test_f1_macro"].std())
 
     # Logistic Regression model with Adjusted TF-IDF Vectorizer to have ngram_range 1, 3
     lr_adjust_5 = Pipeline([('tfidf', TfidfVectorizer(ngram_range=(1, 3))), ('lr', LogisticRegression())])
@@ -168,6 +173,7 @@ if __name__ == "__main__":
     print("EXP 5 (ngram_range=1,3) Mean accuracy:", exp_5_scores["test_accuracy"].mean())
     print("EXP 5 (ngram_range=1,3) Mean F1:", exp_5_scores["test_f1_macro"].mean())
     print("EXP 5 (ngram_range=1,3) accuracy std", exp_5_scores["test_accuracy"].std())
+    print("EXP 5 (ngram_range=1,3) F1 std:", exp_5_scores["test_f1_macro"].std())
 
     # Logistic Regress model with Adjusted TF-IDF Vectorizer to have sublinear term frequencies
     lr_adjust_6 = Pipeline([('tfidf', TfidfVectorizer(sublinear_tf=True)), ('lr', LogisticRegression())])
@@ -177,10 +183,11 @@ if __name__ == "__main__":
     exp_6_scores = cross_validate(lr_adjust_6, X_train, y_train, cv=cv, scoring=["accuracy", "f1_macro"])
     
     print("EXP 6 (sublinear_tf=True) Individual fold accuracies:", exp_6_scores["test_accuracy"])
-    print("EXP 6 (sublinear_tf=True Individual fold F1 scores:", exp_6_scores["test_f1_macro"])
-    print("EXP 6 (sublinear_tf=True Mean accuracy:", exp_6_scores["test_accuracy"].mean())
-    print("EXP 6 (sublinear_tf=True Mean F1:", exp_6_scores["test_f1_macro"].mean())
-    print("EXP 6 (sublinear_tf=True accuracy std", exp_6_scores["test_accuracy"].std())
+    print("EXP 6 (sublinear_tf=True) Individual fold F1 scores:", exp_6_scores["test_f1_macro"])
+    print("EXP 6 (sublinear_tf=True) Mean accuracy:", exp_6_scores["test_accuracy"].mean())
+    print("EXP 6 (sublinear_tf=True) Mean F1:", exp_6_scores["test_f1_macro"].mean())
+    print("EXP 6 (sublinear_tf=True) accuracy std", exp_6_scores["test_accuracy"].std())
+    print("EXP 6 (sublinear_tf=True) F1 std:", exp_6_scores["test_f1_macro"].std())
     
     predictions = lr_pipeline.predict(X_test)
     adjust_1_predictions = lr_adjust_1.predict(X_test)
@@ -191,14 +198,14 @@ if __name__ == "__main__":
     adjust_6_predictions = lr_adjust_6.predict(X_test)
     
     accuracy = accuracy_score(y_test, predictions)
-    adjust_1_predictions_accr = accuracy_score(y_test, adjust_1_predictions)
-    adjust_2_predictions_accr = accuracy_score(y_test, adjust_2_predictions)
-    adjust_3_predictions_accr = accuracy_score(y_test, adjust_3_predictions)
-    adjust_4_predictions_accr = accuracy_score(y_test, adjust_4_predictions)
-    adjust_5_predictions_accr = accuracy_score(y_test, adjust_5_predictions)
-    adjust_6_predictions_accr = accuracy_score(y_test, adjust_6_predictions)
+    adjust_1_accuracy = accuracy_score(y_test, adjust_1_predictions)
+    adjust_2_accuracy = accuracy_score(y_test, adjust_2_predictions)
+    adjust_3_accuracy = accuracy_score(y_test, adjust_3_predictions)
+    adjust_4_accuracy = accuracy_score(y_test, adjust_4_predictions)
+    adjust_5_accuracy = accuracy_score(y_test, adjust_5_predictions)
+    adjust_6_accuracy = accuracy_score(y_test, adjust_6_predictions)
     
-    results = pd.DataFrame({
+    baseline_results = pd.DataFrame({
         "request_text": X_test,
         "actual_category": y_test,
         "predicted_category": predictions
