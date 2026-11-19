@@ -13,7 +13,7 @@ def get_categories() -> list[str]:
     """ Reads the CSV file and returns all the unique categories
 
     Returns: 
-        A dataframe containing the unique categories.
+        A list containing the unique categories.
     """
     df = pd.read_csv(CLEAN_CSV_PATH)
     categories = df["category"].dropna().drop_duplicates().to_list()
@@ -25,7 +25,7 @@ app = FastAPI(title="Public Request Classification API",
     version="1.0.0")
 categories = get_categories()
 
-class PredictonRequest(BaseModel):
+class PredictionRequest(BaseModel):
     request_text: str = Field(min_length=1)
 
     @field_validator("request_text")
@@ -55,7 +55,7 @@ def list_categories():
 
 
 @app.post("/predict", response_model=PredictionResponse)
-def make_prediction(request: PredictonRequest):
+def make_prediction(request: PredictionRequest):
     request_data = [request.request_text]
 
     prediction = pipeline.predict(request_data)
