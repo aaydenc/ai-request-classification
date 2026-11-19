@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split, StratifiedKFold, cross_validate
@@ -5,7 +7,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score, classification_report
 
-DATA_PATH = "./data/clean/clean_data.csv"
+DATA_PATH = Path("./data/clean/clean_data.csv")
+OUTPUT_PATH = Path("./outputs/experiment_results.txt")
 
 def print_classification_reports():
     """Prints the classification reports to the terminal."""
@@ -80,6 +83,89 @@ def print_classification_reports():
     print("ngram = 1,2 identical:", (predictions == adjust_4_predictions).all())
     print("ngram = 1,3 identical:", (predictions == adjust_5_predictions).all())
     print("sublinear_tf identical:", (predictions == adjust_6_predictions).all())
+
+def save_experiment_results():
+    """Saves the model experiment results to a text file."""
+
+    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    with OUTPUT_PATH.open("w", encoding="utf-8") as file:
+
+        file.write("MODEL EXPERIMENTATION RESULTS\n")
+        file.write("=" * 100 + "\n\n")
+
+        experiments = [
+            ("Baseline (C=1.0)", baseline_results, predictions,
+             accuracy, baseline_scores),
+            ("C=0.1", adjust_1_results, adjust_1_predictions,
+             adjust_1_accuracy, exp_1_scores),
+            ("C=0.5", adjust_2_results, adjust_2_predictions,
+             adjust_2_accuracy, exp_2_scores),
+            ("C=2.0", adjust_3_results, adjust_3_predictions,
+             adjust_3_accuracy, exp_3_scores),
+            ("ngram_range=(1, 2)", adjust_4_results, adjust_4_predictions,
+             adjust_4_accuracy, exp_4_scores),
+            ("ngram_range=(1, 3)", adjust_5_results, adjust_5_predictions,
+             adjust_5_accuracy, exp_5_scores),
+            ("sublinear_tf=True", adjust_6_results, adjust_6_predictions,
+             adjust_6_accuracy, exp_6_scores)
+        ]
+
+        for name, results, predicted, test_accuracy, cv_scores in experiments:
+
+            file.write(f"{name} RESULTS\n")
+            file.write("-" * 100 + "\n")
+
+            file.write("Classification results:\n")
+            file.write(results.to_string(index=False) + "\n\n")
+
+            file.write("Classification report:\n")
+            file.write(
+                classification_report(y_test, predicted, zero_division=0)
+                + "\n"
+            )
+
+            file.write(f"Test accuracy: {test_accuracy * 100:.2f}%\n\n")
+
+            file.write("Cross-validation results:\n")
+            file.write(
+                f"Individual fold accuracies: {cv_scores['test_accuracy']}\n"
+            )
+            file.write(
+                f"Individual fold F1 scores: {cv_scores['test_f1_macro']}\n"
+            )
+            file.write(
+                f"Mean accuracy: {cv_scores['test_accuracy'].mean() * 100:.2f}%\n"
+            )
+            file.write(
+                f"Mean F1: {cv_scores['test_f1_macro'].mean() * 100:.2f}%\n"
+            )
+            file.write(
+                f"Accuracy standard deviation: "
+                f"{cv_scores['test_accuracy'].std():.4f}\n"
+            )
+            file.write(
+                f"F1 standard deviation: "
+                f"{cv_scores['test_f1_macro'].std():.4f}\n\n"
+            )
+
+            file.write("=" * 100 + "\n\n")
+
+        file.write("COMPARISON WITH BASELINE\n")
+        file.write("-" * 100 + "\n")
+
+        for name, _, predicted, _, _ in experiments:
+            correct = (predicted == y_test).sum()
+            identical = (predictions == predicted).all()
+
+            file.write(
+                f"{name}: {correct}/{len(y_test)} correct predictions\n"
+            )
+            file.write(
+                f"Identical predictions to baseline: {identical}\n\n"
+            )
+
+    print(f"Experiment results saved to: {OUTPUT_PATH}")
 
 if __name__ == "__main__":
     df = pd.read_csv(DATA_PATH)
@@ -247,4 +333,4 @@ if __name__ == "__main__":
                         "predicted_category": adjust_6_predictions
                     })
 
-    print_classification_reports()
+    save_experiment_results()
