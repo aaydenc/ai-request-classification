@@ -333,4 +333,4 @@ if __name__ == "__main__":
                         "predicted_category": adjust_6_predictions
                     })
 
-    save_experiment_results()
+    print_classification_reports()
